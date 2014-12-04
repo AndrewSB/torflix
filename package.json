@@ -1,0 +1,29 @@
+{
+  "name": "torflix",
+  "version": "0.0.1",
+  "description": "Stream torrents in the browser",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndrewSB/torflix.git"
+  },
+  "keywords": [
+    "torrent",
+    "stream",
+    "browser"
+  ],
+  "author": "AndrewSB, asarode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndrewSB/torflix/issues"
+  },
+  "homepage": "https://github.com/AndrewSB/torflix",
+  "dependencies": {
+    "express": "^4.10.4",
+    "torrent-stream": "^0.16.2"
+  }
+}
