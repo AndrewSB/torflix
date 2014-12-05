@@ -1,4 +1,4 @@
-var torflixApp = angular.module('torflixApp', [])
+var torflixApp = angular.module('torflixApp', ['ngRoute'])
 
 // MainCtrl ============================================
 // - Send a GET request to server and receive info for the file to serve
@@ -12,11 +12,10 @@ torflixApp.controller('MainCtrl', ['$scope', '$http', 'sharedProperties', functi
 		torrent = $scope.torrent
 		console.log("Submitted query: " + $scope.torrent)
 
-
+		torrentHttp = '//localhost:8000/stream/' + torrent
 		$http({
 			method: 'GET',
-			url: '//localhost:8000/stream/' + torrent
-			console.log('GET: ' + '//localhost:8000/stream/' + torrent)
+			url: torrentHttp
 		})
 		.success(function(data, status, headers, config) {
 			// sharedProperties.setFile(data)
