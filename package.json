@@ -24,6 +24,7 @@
   "homepage": "https://github.com/AndrewSB/torflix",
   "dependencies": {
     "express": "^4.10.4",
+    "thepiratebay": "^0.1.2",
     "torrent-stream": "^0.16.2"
   }
 }
