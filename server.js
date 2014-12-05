@@ -23,49 +23,49 @@ app.get('/', function(req,res) {
 
 // APP LOGIC =====================================================
 
-var maxSeeds;
-tpb.search('Naruto', {
-	category: '200',
-}, function(err, results) {
-	if (err) {
-		console.log(err);
-	} else {
-		results.forEach(function(obj) {
-			if (!maxSeeds) maxSeeds = obj;
-			if (parseInt(obj.seeders) > parseInt(maxSeeds.seeders)) maxSeeds = obj;
-		});
-		console.log("max is " + maxSeeds.seeders)
-		maxSeeds
-		var engine = torrentStream(maxSeeds.magnetLink, {
-			path: 'tmp/my-file'
-		})
-		revEngine(engine)
-	}
-});
+// var maxSeeds;
+// tpb.search('Naruto', {
+// 	category: '200',
+// }, function(err, results) {
+// 	if (err) {
+// 		console.log(err);
+// 	} else {
+// 		results.forEach(function(obj) {
+// 			if (!maxSeeds) maxSeeds = obj;
+// 			if (parseInt(obj.seeders) > parseInt(maxSeeds.seeders)) maxSeeds = obj;
+// 		});
+// 		console.log("max is " + maxSeeds.seeders)
+// 		maxSeeds
+// 		var engine = torrentStream(maxSeeds.magnetLink, {
+// 			path: 'tmp/my-file'
+// 		})
+// 		revEngine(engine)
+// 	}
+// });
 
-var revEngine = function(engine) {
-	engine.on('ready', function() {
-		engine.files.forEach(function(file) {
-			console.log('filename:', file.name);
-			var stream = file.createReadStream();
-		})
-	})
+// var revEngine = function(engine) {
+// 	engine.on('ready', function() {
+// 		engine.files.forEach(function(file) {
+// 			console.log('filename:', file.name);
+// 			var stream = file.createReadStream();
+// 		})
+// 	})
 
-	engine.on('download', function() {
-		engine.files.forEach(function(file) {
-			// var file = engine.files[0]
-			// console.log(file.length)
-			// var stream = file.createReadStream()
-			console.log('filename:', file.name);
-			var stream = file.createReadStream();
-		})
-	})
-}
+// 	engine.on('download', function() {
+// 		engine.files.forEach(function(file) {
+// 			// var file = engine.files[0]
+// 			// console.log(file.length)
+// 			// var stream = file.createReadStream()
+// 			console.log('filename:', file.name);
+// 			var stream = file.createReadStream();
+// 		})
+// 	})
+// }
 
 
 // START APP =======================================================
 
-var server = app.listen(3000, function() {
+var server = app.listen(8080, function() {
 
 	var host = server.address().address
 	var port = server.address().port

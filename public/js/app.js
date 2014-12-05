@@ -6,13 +6,16 @@ var torflixApp = angular.module('torflixApp', ['ngRoute'])
 // - Set the source of the video to the right file
 torflixApp.controller('MainCtrl', ['$scope', '$http', 'sharedProperties', function($scope, $http, sharedProperties) {
 
-	var torrent = ""
+	$scope.torrent = {
+		query: "",
+		file: ""
+	}	
 
 	$scope.addTorrent = function() {
-		torrent = $scope.torrent
-		console.log("Submitted query: " + $scope.torrent)
+		
+		console.log("Submitted query: " + $scope.torrent.query)
 
-		torrentHttp = '//localhost:8000/stream/' + torrent
+		torrentHttp = '//localhost:8000/stream/' + $scope.torrent.query
 		$http({
 			method: 'GET',
 			url: torrentHttp
@@ -23,7 +26,7 @@ torflixApp.controller('MainCtrl', ['$scope', '$http', 'sharedProperties', functi
 			console.log('Recieved file location: ' + sharedProperties.getFile().filesource)
 		})
 		.error(function(data, status, headers, config) {
-			console.log('ERROR: something went wrong during the GET request to //localhost:8000/stream/' + torrent)
+			console.log('ERROR: something went wrong during the GET request to //localhost:8000/stream/' + $scope.torrent.query)
 		})
 	}
 
@@ -70,7 +73,9 @@ torflixApp.config(['$routeProvider', function($routeProvider) {
 
 	$routeProvider
 	.when('/', {
+		controller: 'MainCtrl',
 		templateUrl: 'views/input.html'
+
 	})
 	.when('/stream', {
 		templateUrl: 'views/video.html'
