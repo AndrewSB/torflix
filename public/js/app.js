@@ -1,6 +1,8 @@
 var torflixApp = angular.module('torflixApp', ['ngRoute'])
 
-// MainCtrl ============================================
+// =============================================================
+// MainCtrl 
+// =============================================================
 // - Send a GET request to server and receive info for the file to serve
 // - Redirect to the /video page
 // - Set the source of the video to the right file
@@ -15,7 +17,7 @@ torflixApp.controller('MainCtrl', ['$scope', '$http', 'sharedProperties', functi
 		
 		console.log("Submitted query: " + $scope.torrent.query)
 
-		torrentHttp = '//localhost:8000/stream/' + $scope.torrent.query
+		torrentHttp = 'http://localhost:8080/api/stream/' + $scope.torrent.query
 		$http({
 			method: 'GET',
 			url: torrentHttp
@@ -47,8 +49,9 @@ torflixApp.controller('MainCtrl', ['$scope', '$http', 'sharedProperties', functi
 
 */
 
-
-// Service for sharing variables  ======================
+// =============================================================
+// Service for sharing variables  
+// =============================================================
 torflixApp.service('sharedProperties', function() {
 
 	var file = 
@@ -67,8 +70,9 @@ torflixApp.service('sharedProperties', function() {
 
 })
 
-
-// Routing and config ==================================
+// =============================================================
+// Routing and config 
+// =============================================================
 torflixApp.config(['$routeProvider', function($routeProvider) {
 
 	$routeProvider
