@@ -59,14 +59,13 @@ router.route('/stream/:query_or_link')
 							if (parseInt(obj.seeders) > parseInt(maxSeeds.seeders)) { maxSeeds = obj }
 						})
 						resolve(maxSeeds.magnetLink)
-						console.log("max is " + maxSeeds.seeders)
 					}
 				})
 			}
 		})
 
 		queryPromise.then(function(magnet) {
-			console.log(magnet)
+			console.log(magnet.magnetLink)
 			return torrentStream(magnet, {
 				path: 'public/tmp'
 			})
@@ -96,7 +95,7 @@ app.get('/', function(req,res) {
 
 var magnetPromise = new Promise(function(resolve, reject) {
 	var engine = torrentStream(magnet, {
-		path: 'public/tmp'
+		path: 'tmp/torrent'
 	})
 	resolve(engine)
 })
@@ -145,26 +144,6 @@ var revEngine = function(engine) {
 		})
 	})
 }
-
-// var maxSeeds;
-// tpb.search('Naruto', {
-// 	category: '200',
-// }, function(err, results) {
-// 	if (err) {
-// 		console.log(err);
-// 	} else {
-// 		results.forEach(function(obj) {
-// 			if (!maxSeeds) maxSeeds = obj;
-// 			if (parseInt(obj.seeders) > parseInt(maxSeeds.seeders)) maxSeeds = obj;
-// 		});
-// 		console.log("max is " + maxSeeds.seeders)
-// 		maxSeeds
-// 		var engine = torrentStream(maxSeeds.magnetLink, {
-// 			path: 'tmp/my-file'
-// 		})
-// 		revEngine(engine)
-// 	}
-// });
 
 // =============================================================
 // START APP
