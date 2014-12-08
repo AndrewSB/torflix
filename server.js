@@ -40,12 +40,15 @@ router.route('/stream/:query_or_link')
 	.get(function(req,res) {
 		var engine
 		var query = req.params.query_or_link
-		console.log(query)
+		// console.log(query)
 
 		var queryPromise = new Promise(function(resolve, reject) {
 	
 			if (query.indexOf('magnet:?xt=urn:btih:') == 0) {
-				resolve(query)
+				tpb.getTorrent('query').then(function(results) {
+					resolve(results.magnetLink)
+				})
+				
 			} else {
 				tpb.search(query, {
 				category: '200',
@@ -65,7 +68,8 @@ router.route('/stream/:query_or_link')
 		})
 
 		queryPromise.then(function(magnet) {
-			console.log(magnet.magnetLink)
+			console.log("======================== MAGNET LINK ========================")
+			console.log(magnet)
 			return torrentStream(magnet, {
 				path: 'public/tmp'
 			})
